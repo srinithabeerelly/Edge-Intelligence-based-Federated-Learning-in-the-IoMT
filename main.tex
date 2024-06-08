@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\begin{document}
+
+\title{ML vs. FL: A Comparative Study}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+
+Machine Learning (ML) vs. Federated Learning (FL)
+
+\section{ML Model: The Traditional Approach}
+
+In traditional ML, data and models are centralized, and the process is easy to use. However, it comes with several disadvantages, such as high training data requirements, privacy concerns, data loss, network latency, connectivity issues, and security vulnerabilities.
+
+\subsection{Training on the Device}
+
+Training on the device with its own data and model is an alternative. But it has limitations, such as low training data, overfitting, and an inability to adapt to new trends.
+
+\section{Federated Learning (FL)}
+
+FL decentralizes data and maintains user privacy. User data is never sent to a central server.
+
+\subsection{Working of FL}
+
+\subsubsection{Model Distribution}
+
+The initial model is distributed to clients based on availability and suitability. This ensures a positive user experience.
+
+\subsubsection{Local Training}
+
+Each client trains the model locally using its own data, and the resulting model is sent back to the server. Only model parameters leave the device.
+
+\subsubsection{Server Aggregation}
+
+The server averages the locally trained models to create an effective master model. This process is repeated to improve the combined model.
+
+\subsection{Privacy Enhancements in FL}
+
+To enhance privacy in FL, security aggregation or encryption methods are used. This includes techniques like pairing with buddy systems and reducing data at the server.
+
+\section{Example of Federated Learning}
+
+Google Keyboard is an example of FL, where only trained local models are transferred, preserving privacy and reducing network communication issues.
+
+\section{Communication Cost in FL}
+
+Reducing communication costs in FL is crucial for efficiency. Different strategies include reducing communication rounds, transferring compressed models, and transferring only top updated parameters.
+
+\subsection{Reducing Communication Rounds}
+
+Reducing the number of communication rounds can lead to the loss of local training information.
+
+\subsection{Reducing Communication Cost in Each Round}
+
+This can be done by transferring whole models from selected clients or transferring compressed models, balancing the trade-off between communication cost and model accuracy.
+
+\subsubsection{Sparse Models}
+
+Transferring sparse models, by selecting only significantly updated parameters, can significantly reduce communication costs while maintaining model accuracy.
+
+\subsubsection{Hyperparameter Control}
+
+A hyperparameter controls the level of sparsification, adjusting the trade-off between model accuracy and communication cost.
+
+\section{Terminology}
+
+\begin{itemize}
+\item Gradient Descent: Stochastic, Batch, Mini-batch.
+\item Algo: Federated Stochastic Gradient Descent (FedSGD) and Federated Averaging (FedAVG).
+\end{itemize}
+
+\section{Relation between FedSGD and FedAVG}
+
+FedSGD can be considered a special case of FedAVG. The latter allows selecting a fraction of clients to reduce the number of participating clients in each round.
+
+\section{Future Work}
+
+Future work involves exploring other neural network models and using more edge devices to improve communication cost reduction while maintaining model accuracy.
+
+\section{Sparse Autoencoders}
+
+Sparse Autoencoders provide an information bottleneck without reducing the number of neurons in hidden layers. They are valuable for edge devices due to their smaller size.
+
+\section{Telemedicine}
+
+Telemedicine utilizes telecommunication technologies to provide medical information and services.
+
+\section{Watermarking}
+
+Watermarking is a method to hide digital information in a carrier signal for protection against unauthorized use.
+
+\section{Conclusion}
+
+\begin{itemize}
+\item We propose a novel method to reduce communication costs in FL by sparsifying local and global models.
+\item The method involves exchanging the most updated parameters of neural network models.
+\end{itemize}
+
+\end{document}

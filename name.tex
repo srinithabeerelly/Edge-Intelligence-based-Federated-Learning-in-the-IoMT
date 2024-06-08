@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Algorithm: get\_clients}
+
+\textbf{Input:}
+\begin{itemize}
+    \item $\text{class1}$: Data points belonging to the first class
+    \item $\text{class2}$: Data points belonging to the second class
+    \item $\text{n\_clients}$: Number of clients
+\end{itemize}
+
+\textbf{Output:}
+\begin{itemize}
+    \item $\text{clients\_X}$: List of training data for each client
+    \item $\text{clients\_y}$: List of labels for each client
+    \item $\text{X\_test}$: Test data
+    \item $\text{y\_test}$: Test labels
+\end{itemize}
+
+\begin{algorithmic}[1]
+\Procedure{get\_clients}{$\text{class1, class2, n\_clients}$}
+    \State $\text{clients\_X} \gets []$
+    \State $\text{clients\_y} \gets []$
+    \State $\text{clientsXtest} \gets []$
+    \State $\text{clientsYtest} \gets []$
+
+    \State $\text{clusters\_1} \gets \text{KMeans}(\text{n\_clusters=n\_clients, random\_state=0}).\text{fit\_predict}(\text{class1})$
+    \State $\text{clusters\_2} \gets \text{KMeans}(\text{n\_clusters=n\_clients, random\_state=0}).\text{fit\_predict}(\text{class2})$
+
+    \For{$i$ in range$(\text{n\_clients})$}
+        \State $\text{X\_train0, X\_test0, y\_train0, y\_test0} \gets \text{train\_test\_split}(\text{class1}[\text{clusters\_1} == i], \text{np.zeros}((\text{class1}[\text{clusters\_1} == i].\text{shape}[0],)), \text{test\_size}=0.2)$
+        \State $\text{X\_train1, X\_test1, y\_train1, y\_test1} \gets \text{train\_test\_split}(\text{class2}[\text{clusters\_2} == i], \text{np.ones}((\text{class2}[\text{clusters\_2} == i].\text{shape}[0],)), \text{test\_size}=0.2)$
+
+        \State $\text{clients\_X}.\text{append}([\text{X\_train0, X\_train1}])$
+        \State $\text{clients\_y}.\text{append}([\text{y\_train0, y\_train1}])$
+
+        \State $\text{clientsXtest}.\text{extend}([\text{X\_test0, X\_test1}])$
+        \State $\text{clientsYtest}.\text{extend}([\text{y\_test0, y\_test1}])$
+    \EndFor
+
+    \State $\text{X\_test} \gets \text{np.concatenate}(\text{clientsXtest}, \text{axis}=0)$
+    \State $\text{y\_test} \gets \text{np.concatenate}(\text{clientsYtest}, \text{axis}=0)$
+
+    \State \textbf{return} $\text{clients\_X, clients\_y, X\_test, y\_test}$
+\EndProcedure
+\end{algorithmic}
+
+\end{document}
